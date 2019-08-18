@@ -1,0 +1,83 @@
+service: yyp-backend-p
+
+custom:
+  # Our stage is based on what is passed in when running serverless
+  # commands. Or fallsback to what we have set in the provider section.
+  stage: ${opt:stage, self:provider.stage}
+
+  pkgPyFuncs: # plugin configuration
+    buildDir: _build
+    requirementsFile: 'requirements.txt'
+    globalRequirements:
+      - requirements.txt
+    globalIncludes:
+      - ./common
+    cleanup: false
+
+provider:
+  name: aws
+  region: us-west-2
+  runtime: python3.7
+
+  environment:
+    tableName:
+      ${file(../resources/serverless.yml):custom.tableName}
+
+  # notice the references to external serverless.yml variables
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+       - dynamodb:Query
+       - dynamodb:Scan
+       - dynamodb:GetItem
+       - dynamodb:PutItem
+       - dynamodb:UpdateItem
+       - dynamodb:DeleteItem
+      Resource:
+        - 'Fn::ImportValue': ${self:custom.stage}-CountersTableArn
+
+
+# layers:
+#   SiLayer1:
+#     path: layers/layer1
+#     name: ${self:provider.stage}-SiLayer1
+#     description: SI Utilities
+#     allowedAccounts:
+#       - '*' # ALL accounts!
+#     compatibleRuntimes:
+#       - python3.7
+      
+#   ProcessPayload:
+#     path: layers/process_payload
+#     name: ${self:provider.stage}-ProcessPayload
+#     description: SI Payload Decoder
+#     allowedAccounts:
+#       - '*' # ALL accounts!
+#     compatibleRuntimes:
+#       - python3.7
+
+package:
+  individually: true
+
+plugins:
+  - serverless-package-python-functions
+  - serverless-offline
+
+
+functions:
+
+  process_yyp:
+    runtime: python3.7
+    name: process_yyp
+    handler: lambda_handler.process_yyp
+    events:
+      - http:
+          method: GET
+          path: process_gw_events
+          cors: true
+
+    package:
+      include:
+        - process_yyp
+
+      artifact: ${self:custom.pkgPyFuncs.buildDir}/process_yyp.zip

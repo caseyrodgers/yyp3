@@ -1,0 +1,6 @@
+{ "default": "MESSAGE_TOKEN",
+  "APNS": "{\"aps\":{\"alert\": \"MESSAGE_TOKEN\",\"action\":\"ACTION_TOKEN\"} }",
+  "APNS_SANDBOX": "{\"aps\":{\"alert\": \"MESSAGE_TOKEN\",\"action\":\"ACTION_TOKEN\"} }",
+  "GCM":"{\"data\":{\"message\":\"MESSAGE_TOKEN\",\"action\":\"ACTION_TOKEN\"}}",
+  "ADM": "{ \"data\": { \"message\": \"MESSAGE_TOKEN\",\"action\":\"ACTION_TOKEN\" }}"
+}

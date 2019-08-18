@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Yoga Your Practice
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label>Class Def: </ion-label>
+      <ion-textarea rows="20" [(ngModel)]="yClassDef"></ion-textarea>
+    </ion-item>
+
+    <button ion-button block large (click)="parseClass()">Parse</button>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/poses"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{pose?.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding speaker-detail">
+  <div *ngIf="pose" class="ion-text-center">
+    <img [src]="pose.profilePic" [alt]="pose.name">
+    <br>
+
+    <ion-button fill="clear" size="small" color="twitter">
+      <ion-icon name="logo-twitter" slot="icon-only"></ion-icon>
+    </ion-button>
+    <ion-button fill="clear" size="small" color="github">
+      <ion-icon name="logo-github" slot="icon-only"></ion-icon>
+    </ion-button>
+    <ion-button fill="clear" size="small" color="instagram">
+      <ion-icon name="logo-instagram" slot="icon-only"></ion-icon>
+    </ion-button>
+  </div>
+
+  <p>{{pose?.about}}</p>
+</ion-content>

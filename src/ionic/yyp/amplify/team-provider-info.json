@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "yyp-dev-20190818112140-authRole",
+            "UnauthRoleArn": "arn:aws:iam::992556415460:role/yyp-dev-20190818112140-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::992556415460:role/yyp-dev-20190818112140-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "yyp-dev-20190818112140-deployment",
+            "UnauthRoleName": "yyp-dev-20190818112140-unauthRole",
+            "StackName": "yyp-dev-20190818112140",
+            "StackId": "arn:aws:cloudformation:us-west-2:992556415460:stack/yyp-dev-20190818112140/06ae2b60-c1e5-11e9-878c-06825eacfe56"
+        }
+    }
+}

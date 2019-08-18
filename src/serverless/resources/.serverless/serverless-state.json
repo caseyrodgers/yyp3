@@ -1,0 +1,218 @@
+{
+  "service": {
+    "service": "yyp-resources",
+    "serviceObject": {
+      "name": "yyp-resources"
+    },
+    "provider": {
+      "stage": "dev",
+      "variableSyntax": "\\${([ ~:a-zA-Z0-9._@'\",\\-\\/\\(\\)*]+?)}",
+      "name": "aws",
+      "region": "us-west-2",
+      "profile": "sb_serverless",
+      "versionFunctions": true,
+      "remoteFunctionData": null,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                  {
+                    "ServerSideEncryptionByDefault": {
+                      "SSEAlgorithm": "AES256"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "CognitoUserPool": {
+            "Type": "AWS::Cognito::UserPool",
+            "Properties": {
+              "MfaConfiguration": "OFF",
+              "UserPoolName": "yyp-user-pool",
+              "UsernameAttributes": [
+                "email"
+              ],
+              "Policies": {
+                "PasswordPolicy": {
+                  "MinimumLength": 6,
+                  "RequireLowercase": false,
+                  "RequireNumbers": true,
+                  "RequireSymbols": false,
+                  "RequireUppercase": true
+                }
+              }
+            }
+          },
+          "CognitoUserPoolClient": {
+            "Type": "AWS::Cognito::UserPoolClient",
+            "Properties": {
+              "ClientName": "yyp-user-pool-client",
+              "GenerateSecret": false,
+              "UserPoolId": {
+                "Ref": "CognitoUserPool"
+              }
+            }
+          },
+          "CountersTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "counters",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "counterName",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "counterName",
+                  "KeyType": "HASH"
+                }
+              ],
+              "ProvisionedThroughput": {
+                "ReadCapacityUnits": 1,
+                "WriteCapacityUnits": 1
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          },
+          "CountersTableArn": {
+            "Value": {
+              "Fn::GetAtt": [
+                "CountersTable",
+                "Arn"
+              ]
+            },
+            "Export": {
+              "Name": "dev-CountersTableArn"
+            }
+          }
+        }
+      },
+      "coreCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                  {
+                    "ServerSideEncryptionByDefault": {
+                      "SSEAlgorithm": "AES256"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          }
+        }
+      }
+    },
+    "custom": {
+      "stage": "dev",
+      "tableName": "test ARN",
+      "tableThroughputs": {
+        "prod": 5,
+        "default": 1
+      },
+      "tableThroughput": 1
+    },
+    "pluginsData": {},
+    "functions": {},
+    "resources": {
+      "Resources": {
+        "CognitoUserPool": {
+          "Type": "AWS::Cognito::UserPool",
+          "Properties": {
+            "MfaConfiguration": "OFF",
+            "UserPoolName": "yyp-user-pool",
+            "UsernameAttributes": [
+              "email"
+            ],
+            "Policies": {
+              "PasswordPolicy": {
+                "MinimumLength": 6,
+                "RequireLowercase": false,
+                "RequireNumbers": true,
+                "RequireSymbols": false,
+                "RequireUppercase": true
+              }
+            }
+          }
+        },
+        "CognitoUserPoolClient": {
+          "Type": "AWS::Cognito::UserPoolClient",
+          "Properties": {
+            "ClientName": "yyp-user-pool-client",
+            "GenerateSecret": false,
+            "UserPoolId": {
+              "Ref": "CognitoUserPool"
+            }
+          }
+        },
+        "CountersTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "counters",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "counterName",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "counterName",
+                "KeyType": "HASH"
+              }
+            ],
+            "ProvisionedThroughput": {
+              "ReadCapacityUnits": 1,
+              "WriteCapacityUnits": 1
+            }
+          }
+        }
+      },
+      "Outputs": {
+        "CountersTableArn": {
+          "Value": {
+            "Fn::GetAtt": [
+              "CountersTable",
+              "Arn"
+            ]
+          },
+          "Export": {
+            "Name": "dev-CountersTableArn"
+          }
+        }
+      }
+    },
+    "serviceFilename": "serverless.yml",
+    "layers": {}
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/yyp-resources/dev/1566155031815-2019-08-18T19:03:51.815Z",
+    "artifact": ""
+  }
+}
