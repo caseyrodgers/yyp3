@@ -9,7 +9,7 @@ import { ConferenceData } from '../../providers/conference-data';
 })
 export class PosesDetailPage {
   speaker: any;
-
+  pose: any;
   constructor(
     private dataProvider: ConferenceData,
     private router: Router,

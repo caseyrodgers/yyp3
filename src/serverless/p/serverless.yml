@@ -18,6 +18,7 @@ provider:
   name: aws
   region: us-west-2
   runtime: python3.7
+  profile: sb_serverless
 
   environment:
     tableName:
@@ -69,11 +70,11 @@ functions:
   process_yyp:
     runtime: python3.7
     name: process_yyp
-    handler: lambda_handler.process_yyp
+    handler: lambda_handler.process_lambda
     events:
       - http:
           method: GET
-          path: process_gw_events
+          path: process_yyp
           cors: true
 
     package:

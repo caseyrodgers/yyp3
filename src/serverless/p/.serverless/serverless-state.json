@@ -10,6 +10,7 @@
       "name": "aws",
       "region": "us-west-2",
       "runtime": "python3.7",
+      "profile": "sb_serverless",
       "environment": {
         "tableName": "test ARN"
       },
@@ -149,7 +150,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/yyp-backend-p/dev/1566169584304-2019-08-18T23:06:24.304Z/_build/process_yyp.zip"
+                "S3Key": "serverless/yyp-backend-p/dev/1566230632080-2019-08-19T16:03:52.080Z/_build/process_yyp.zip"
               },
               "FunctionName": "process_yyp",
               "Handler": "lambda_handler.process_yyp",
@@ -173,14 +174,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "ProcessUnderscoreyypLambdaVersionsrXX5A7sjY14OzOCxZl7FFxKsA35VuuYLSifmOvtLw": {
+          "ProcessUnderscoreyypLambdaVersionvvqJD09peNnZxUUWvetLnxHSWaaugNMHZrttoFSiYQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ProcessUnderscoreyypLambdaFunction"
               },
-              "CodeSha256": "RPER7TruQCr18nPAXXfGyDv7GdgyQtBy4HDtLZWBsQ4="
+              "CodeSha256": "Pjp+2b4T9J+3Km/Q3LHghHHZCxsBzm5GoBLOLyeGNww="
             }
           },
           "ApiGatewayRestApi": {
@@ -194,7 +195,7 @@
               }
             }
           },
-          "ApiGatewayResourceProcessgwevents": {
+          "ApiGatewayResourceProcessyyp": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -203,13 +204,13 @@
                   "RootResourceId"
                 ]
               },
-              "PathPart": "process_gw_events",
+              "PathPart": "process_yyp",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayMethodProcessgweventsOptions": {
+          "ApiGatewayMethodProcessyypOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -249,20 +250,20 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceProcessgwevents"
+                "Ref": "ApiGatewayResourceProcessyyp"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayMethodProcessgweventsGet": {
+          "ApiGatewayMethodProcessyypGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "GET",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceProcessgwevents"
+                "Ref": "ApiGatewayResourceProcessyyp"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -299,7 +300,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1566169581523": {
+          "ApiGatewayDeployment1566230618734": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -308,8 +309,8 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodProcessgweventsOptions",
-              "ApiGatewayMethodProcessgweventsGet"
+              "ApiGatewayMethodProcessyypOptions",
+              "ApiGatewayMethodProcessyypGet"
             ]
           },
           "ProcessUnderscoreyypLambdaPermissionApiGateway": {
@@ -359,7 +360,7 @@
           "ProcessUnderscoreyypLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ProcessUnderscoreyypLambdaVersionsrXX5A7sjY14OzOCxZl7FFxKsA35VuuYLSifmOvtLw"
+              "Ref": "ProcessUnderscoreyypLambdaVersionvvqJD09peNnZxUUWvetLnxHSWaaugNMHZrttoFSiYQ"
             }
           },
           "ServiceEndpoint": {
@@ -444,7 +445,7 @@
           {
             "http": {
               "method": "get",
-              "path": "process_gw_events",
+              "path": "process_yyp",
               "cors": {
                 "origins": [
                   "*"
@@ -484,7 +485,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/yyp-backend-p/dev/1566169584304-2019-08-18T23:06:24.304Z",
+    "artifactDirectoryName": "serverless/yyp-backend-p/dev/1566230632080-2019-08-19T16:03:52.080Z",
     "artifact": ""
   }
 }

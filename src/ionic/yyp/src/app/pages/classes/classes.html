@@ -27,6 +27,7 @@
 <ion-content>
   <ion-list #classesList [hidden]="shownSessions === 0">
     <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
+      <ion-button (click)="parasePose()">Parse Pose</ion-button>
       <ion-item-divider sticky>
         <ion-label>
           {{group.time}}
